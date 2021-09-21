@@ -10,6 +10,16 @@ public class Usuario implements Cloneable {
     private String senha;
     private List<Endereco> enderecos;
 
+    public Usuario () {}
+
+    public Usuario (Usuario user) {
+        this.id = user.getId();
+        this.nome = user.getNome();
+        this.email = user.getEmail();
+        this.senha = user.getSenha();
+        this.enderecos = user.getEnderecos();
+    }
+
     public Long getId() {
         return id;
     }
@@ -60,14 +70,7 @@ public class Usuario implements Cloneable {
 
     @Override
     protected Object clone() {
-        Usuario usuarioClone = null;
-        try {
-            usuarioClone = (Usuario) super.clone();
-            usuarioClone.enderecos.stream().map( e -> e.clone());
-        } catch (CloneNotSupportedException cloneNotSupportedException) {
-            cloneNotSupportedException.printStackTrace();
-        }
-        return usuarioClone;
+        return new Usuario(this);
     }
 
 
